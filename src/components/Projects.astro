@@ -1,0 +1,29 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import ProjectGroup from "./ProjectGroup.astro";
+import { projectGroups } from "../data/projects";
+---
+
+<section
+  id="projects"
+  aria-labelledby="projects-heading"
+  class="projects-section"
+>
+  <div class="mx-auto max-w-[1100px] scroll-mt-16 px-6 py-16 sm:px-10 sm:py-20">
+    <SectionHeading
+      id="projects-heading"
+      eyebrow="02 — Selected work"
+      title="Apps in production"
+    />
+    <div class="mt-10">
+      {projectGroups.map((g) => <ProjectGroup group={g} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+</style>

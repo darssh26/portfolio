@@ -1,0 +1,21 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import ExperienceItem from "./ExperienceItem.astro";
+import { experience } from "../data/experience";
+---
+
+<section
+  id="experience"
+  aria-labelledby="experience-heading"
+  class="mx-auto max-w-[1100px] scroll-mt-16 px-6 py-16 sm:px-10 sm:py-20"
+>
+  <SectionHeading id="experience-heading" eyebrow="01 — Experience" title="Where I've led" />
+
+  <ol class="mt-10">
+    {
+      experience.map((item, idx) => (
+        <ExperienceItem item={item} isLast={idx === experience.length - 1} />
+      ))
+    }
+  </ol>
+</section>

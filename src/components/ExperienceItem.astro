@@ -1,0 +1,121 @@
+---
+import type { Experience } from "../data/experience";
+
+interface Props {
+  item: Experience;
+  isLast: boolean;
+}
+
+const { item, isLast } = Astro.props;
+---
+
+<li class="exp-item" class:list={{ last: isLast }}>
+  {!isLast && <span class="rail" aria-hidden="true" />}
+  <span class="dot" aria-hidden="true"></span>
+
+  <div class="exp-row">
+    <h3 class="exp-role">
+      {item.role}
+      <span class="sep" aria-hidden="true">·</span>
+      <span class="exp-company">{item.company}</span>
+    </h3>
+    <p class="exp-dates">{item.start} — {item.end}</p>
+  </div>
+  <p class="exp-loc">{item.location}</p>
+
+  <ul class="exp-bullets">
+    {
+      item.bullets.map((b) => (
+        <li>
+          <span class="bullet-dot" aria-hidden="true" />
+          <span>{b}</span>
+        </li>
+      ))
+    }
+  </ul>
+</li>
+
+<style>
+  .exp-item {
+    position: relative;
+    padding-left: 2rem;
+    padding-bottom: 2.5rem;
+  }
+  .exp-item.last {
+    padding-bottom: 0;
+  }
+  .rail {
+    position: absolute;
+    left: 7px;
+    top: 0.75rem;
+    width: 1px;
+    height: 100%;
+    background: var(--border);
+  }
+  .dot {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: var(--bg);
+  }
+  .exp-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  .exp-role {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .sep {
+    color: var(--primary);
+    margin: 0 0.25rem;
+  }
+  .exp-company {
+    color: var(--text);
+  }
+  .exp-dates {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .exp-loc {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .exp-bullets {
+    margin: 0.875rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .exp-bullets li {
+    display: flex;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+  .bullet-dot {
+    flex: none;
+    margin-top: 0.625rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--text-muted);
+  }
+</style>

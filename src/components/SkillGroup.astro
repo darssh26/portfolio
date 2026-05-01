@@ -1,0 +1,62 @@
+---
+import type { SkillGroup } from "../data/skills";
+
+interface Props {
+  group: SkillGroup;
+}
+
+const { group } = Astro.props;
+const isEmphasized = group.emphasis === true;
+---
+
+<div class="skill-card" class:list={{ emphasized: isEmphasized }}>
+  <h3 class="eyebrow">{group.heading}</h3>
+  <ul class="skill-list">
+    {group.items.map((item) => <li class="skill-pill">{item}</li>)}
+  </ul>
+</div>
+
+<style>
+  .skill-card {
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .skill-card.emphasized {
+    border-color: color-mix(in oklch, var(--primary) 35%, var(--border));
+    background: color-mix(in oklch, var(--primary) 6%, var(--bg));
+  }
+  @media (min-width: 640px) {
+    .skill-card.emphasized {
+      grid-column: span 2;
+    }
+  }
+  .skill-card .eyebrow {
+    margin: 0 0 0.875rem;
+  }
+  .skill-card.emphasized .eyebrow {
+    color: var(--primary);
+  }
+  .skill-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skill-pill {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 0.8125rem;
+    color: var(--text);
+  }
+  .skill-card.emphasized .skill-pill {
+    background: var(--bg);
+    border-color: color-mix(in oklch, var(--primary) 25%, var(--border));
+    color: var(--text);
+  }
+</style>

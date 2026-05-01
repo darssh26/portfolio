@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* color — brand */
+  --color-brand-50: #eef3fb;
+  --color-brand-100: #dbe5f4;
+  --color-brand-200: #b7cae8;
+  --color-brand-300: #7e9dd0;
+  --color-brand-400: #4f75b5;
+  --color-brand-500: #2b538f;
+  --color-brand-600: #1f4276;
+  --color-brand-700: #173458;
+  --color-brand-800: #11253e;
+  --color-brand-900: #0b1a2c;
+
+  /* color — neutral */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f6f7f8;
+  --color-neutral-100: #eef0f2;
+  --color-neutral-200: #e2e5e9;
+  --color-neutral-300: #c9ced4;
+  --color-neutral-400: #9aa1ab;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4a515b;
+  --color-neutral-700: #2e343c;
+  --color-neutral-800: #1b1f25;
+  --color-neutral-900: #0f1217;
+
+  /* status */
+  --color-positive: #137a4b;
+  --color-positive-dark: #3dbe82;
+
+  /* type */
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  --text-h1: 3rem;
+  --text-h2: 2rem;
+  --text-h3: 1.375rem;
+  --text-body: 1rem;
+  --text-small: 0.8125rem;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+}
+
+/* ── Semantic tokens — light ──────────────────── */
+:root {
+  --bg: var(--color-neutral-0);
+  --surface: var(--color-neutral-50);
+  --surface-2: var(--color-neutral-100);
+  --border: var(--color-neutral-200);
+  --border-strong: var(--color-neutral-300);
+  --text: var(--color-neutral-900);
+  --text-soft: var(--color-neutral-600);
+  --text-muted: var(--color-neutral-500);
+  --primary: var(--color-brand-500);
+  --primary-hover: var(--color-brand-600);
+  --on-primary: #ffffff;
+  --success: var(--color-positive);
+}
+
+/* ── Semantic tokens — dark ───────────────────── */
+.dark {
+  --bg: #0b0d11;
+  --surface: #11141a;
+  --surface-2: #171b22;
+  --border: #232830;
+  --border-strong: #2f3540;
+  --text: #eceef1;
+  --text-soft: #b6bcc5;
+  --text-muted: #8a929d;
+  --primary: #6f9ad8;
+  --primary-hover: #87abde;
+  --on-primary: #0b1a2c;
+  --success: var(--color-positive-dark);
+}
+
+/* ── Base styles ──────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  font-size: 16px;
+  line-height: 1.55;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--primary) 28%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 0;
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── Reusable patterns ────────────────────────── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  margin-right: 8px;
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--success) 18%, transparent);
+}

@@ -1,0 +1,29 @@
+---
+import type { ProjectGroup } from "../data/projects";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+  group: ProjectGroup;
+}
+
+const { group } = Astro.props;
+---
+
+<div class="proj-group">
+  <h3 class="eyebrow">{group.heading}</h3>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {group.projects.map((p) => <ProjectCard project={p} />)}
+  </div>
+</div>
+
+<style>
+  .proj-group {
+    margin-bottom: 2.5rem;
+  }
+  .proj-group:last-child {
+    margin-bottom: 0;
+  }
+  .proj-group .eyebrow {
+    margin: 0 0 1rem;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  showSuffix?: boolean;
+  size?: "sm" | "md";
+}
+const { showSuffix = false, size = "sm" } = Astro.props;
+
+const markPx = size === "md" ? 36 : 28;
+const markRadius = size === "md" ? 7 : 6;
+const markFont = size === "md" ? 22 : 17;
+const wordSize = size === "md" ? 22 : 16;
+---
+
+<span class="inline-flex items-center" style={`gap:${size === "md" ? 14 : 10}px`}>
+  <span
+    class="flex items-center justify-center font-bold leading-none"
+    style={`width:${markPx}px;height:${markPx}px;border-radius:${markRadius}px;background:var(--primary);color:var(--on-primary);font-size:${markFont}px;letter-spacing:-0.02em`}
+    aria-hidden="true"
+  >
+    M
+  </span>
+  <span
+    class="font-semibold lowercase"
+    style={`font-size:${wordSize}px;letter-spacing:-0.015em;color:var(--text)`}
+  >
+    mostafa ead{
+      showSuffix && (
+        <span style="color:var(--text-muted);font-weight:400">  ·  tech lead</span>
+      )
+    }
+  </span>
+</span>
