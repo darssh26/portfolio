@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://mostafa-ead.github.io',
+  site: 'https://darssh26.github.io',
+  base: '/portfolio',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
