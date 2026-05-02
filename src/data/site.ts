@@ -9,7 +9,7 @@ export const site = {
   phone: "+20 114 246 6596",
   linkedin: "https://www.linkedin.com/in/mostafa-ead-b403b51a2/",
   github: "https://github.com/darssh26",
-  cvPath: "/cv.pdf",
+  cvPath: "cv.pdf",
   stack: ["Flutter", "Dart", "TypeScript", "Node.js", "Python"],
   certs: ["AWS Certified ML — Specialty"],
   description:

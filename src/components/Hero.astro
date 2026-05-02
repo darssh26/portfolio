@@ -2,6 +2,9 @@
 import { site } from "../data/site";
 import ThemeToggle from "./ThemeToggle.astro";
 import Wordmark from "./Wordmark.astro";
+import { withBase } from "../utils/url";
+
+const cvHref = withBase(site.cvPath);
 ---
 
 <header class="site-header">
@@ -12,7 +15,7 @@ import Wordmark from "./Wordmark.astro";
     <nav class="flex items-center gap-1 text-sm">
       <a href="#experience" class="nav-link">Work</a>
       <a href="#skills" class="nav-link">Skills</a>
-      <a href={site.cvPath} class="nav-link">CV</a>
+      <a href={cvHref} class="nav-link">CV</a>
       <a href="#contact" class="nav-link">Contact</a>
       <ThemeToggle />
     </nav>
@@ -32,7 +35,7 @@ import Wordmark from "./Wordmark.astro";
         View work
         <span aria-hidden="true">→</span>
       </a>
-      <a href={site.cvPath} class="btn-ghost">Read CV</a>
+      <a href={cvHref} class="btn-ghost">Read CV</a>
     </div>
   </div>
 
