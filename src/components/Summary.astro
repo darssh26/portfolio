@@ -8,17 +8,48 @@ import { site } from "../data/site";
   class="mx-auto max-w-[1100px] scroll-mt-16 px-6 pb-16 sm:px-10 sm:pb-20"
 >
   <h2 id="about-heading" class="sr-only">About</h2>
-  <p class="about">{site.about}</p>
+  <figure class="about reveal">
+    <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+    <blockquote>{site.about}</blockquote>
+  </figure>
 </section>
 
 <style>
   .about {
+    position: relative;
+    margin: 0;
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: color-mix(in oklch, var(--surface) 70%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: var(--shadow-sm);
+    max-width: 72ch;
+    overflow: hidden;
+  }
+  .about::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--gradient-text);
+    border-radius: 3px 0 0 3px;
+  }
+  .quote-mark {
+    position: absolute;
+    top: -0.25rem;
+    left: 0.85rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: color-mix(in oklch, var(--primary) 40%, transparent);
+    pointer-events: none;
+  }
+  blockquote {
+    margin: 0;
     font-size: 18px;
     line-height: 1.65;
     color: var(--text);
-    max-width: 64ch;
-    border-left: 2px solid var(--primary);
-    padding-left: 1.25rem;
-    margin: 0;
   }
 </style>

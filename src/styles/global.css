@@ -63,6 +63,29 @@
   --primary-hover: var(--color-brand-600);
   --on-primary: #ffffff;
   --success: var(--color-positive);
+
+  /* gradient + glow tokens */
+  --accent: #7c5cff;
+  --accent-2: #19c2a0;
+  --gradient-text: linear-gradient(
+    100deg,
+    var(--color-brand-700) 0%,
+    var(--color-brand-500) 38%,
+    var(--accent) 78%,
+    var(--accent-2) 100%
+  );
+  --gradient-rule: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--primary) 65%, transparent),
+    transparent
+  );
+  --shadow-sm: 0 1px 2px 0 rgb(15 18 23 / 0.04),
+    0 1px 3px 0 rgb(15 18 23 / 0.05);
+  --shadow-md: 0 6px 18px -8px rgb(15 18 23 / 0.18),
+    0 2px 6px -2px rgb(15 18 23 / 0.06);
+  --shadow-lg: 0 24px 48px -24px rgb(15 18 23 / 0.22),
+    0 4px 12px -6px rgb(15 18 23 / 0.08);
+  --header-bg: color-mix(in oklch, var(--bg) 78%, transparent);
 }
 
 /* ── Semantic tokens — dark ───────────────────── */
@@ -79,6 +102,27 @@
   --primary-hover: #87abde;
   --on-primary: #0b1a2c;
   --success: var(--color-positive-dark);
+
+  --accent: #a08bff;
+  --accent-2: #2ddcb6;
+  --gradient-text: linear-gradient(
+    100deg,
+    #d6e2f5 0%,
+    #6f9ad8 38%,
+    #a08bff 78%,
+    #2ddcb6 100%
+  );
+  --gradient-rule: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--primary) 55%, transparent),
+    transparent
+  );
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 8px 24px -10px rgb(0 0 0 / 0.55),
+    0 2px 6px -2px rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 30px 60px -28px rgb(0 0 0 / 0.7),
+    0 6px 16px -8px rgb(0 0 0 / 0.4);
+  --header-bg: color-mix(in oklch, var(--bg) 72%, transparent);
 }
 
 /* ── Base styles ──────────────────────────────── */
@@ -101,6 +145,54 @@ body {
   transition:
     background-color 0.18s ease,
     color 0.18s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient page background — subtle gradient + dotted grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(
+      900px 520px at 88% -10%,
+      color-mix(in oklch, var(--primary) 18%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 480px at -10% 30%,
+      color-mix(in oklch, var(--accent) 14%, transparent),
+      transparent 65%
+    );
+  pointer-events: none;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(
+    color-mix(in oklch, var(--text) 8%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 30%,
+    black 30%,
+    transparent 75%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 30%,
+    black 30%,
+    transparent 75%
+  );
+  opacity: 0.55;
+  pointer-events: none;
+}
+.dark body::after {
+  opacity: 0.35;
 }
 
 ::selection {
@@ -147,10 +239,44 @@ body {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--border);
+  background: var(--gradient-rule);
+}
+
+/* ── Gradient text utility ───────────────────── */
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Reveal-on-scroll ─────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 .status-dot {
+  position: relative;
   display: inline-block;
   width: 7px;
   height: 7px;
@@ -158,4 +284,30 @@ body {
   background: var(--success);
   margin-right: 8px;
   box-shadow: 0 0 0 3px color-mix(in oklch, var(--success) 18%, transparent);
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--success);
+  opacity: 0.55;
+  animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot::after {
+    animation: none;
+    display: none;
+  }
 }

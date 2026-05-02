@@ -17,7 +17,7 @@ import { site } from "../data/site";
     Open to senior and lead engineering roles — remote-first.
   </p>
   <div class="contact-grid mt-8">
-    <a href={`mailto:${site.email}`} class="contact-card">
+    <a href={`mailto:${site.email}`} class="contact-card reveal">
       <span class="icon" aria-hidden="true">
         <svg
           width="16"
@@ -39,7 +39,7 @@ import { site } from "../data/site";
       </div>
     </a>
 
-    <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="contact-card">
+    <a href={`tel:${site.phone.replace(/\s+/g, "")}`} class="contact-card reveal">
       <span class="icon" aria-hidden="true">
         <svg
           width="16"
@@ -66,7 +66,7 @@ import { site } from "../data/site";
       href={site.linkedin}
       target="_blank"
       rel="noopener noreferrer"
-      class="contact-card"
+      class="contact-card reveal"
     >
       <span class="icon" aria-hidden="true">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -85,7 +85,7 @@ import { site } from "../data/site";
       href={site.github}
       target="_blank"
       rel="noopener noreferrer"
-      class="contact-card"
+      class="contact-card reveal"
     >
       <span class="icon" aria-hidden="true">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -119,32 +119,62 @@ import { site } from "../data/site";
     }
   }
   .contact-card {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 0.875rem;
-    padding: 1rem;
+    gap: 0.95rem;
+    padding: 1.1rem 1.2rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    background: var(--bg);
+    background: color-mix(in oklch, var(--bg) 80%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    overflow: hidden;
     transition:
-      border-color 0.15s,
-      box-shadow 0.15s;
+      border-color 0.2s,
+      box-shadow 0.25s,
+      transform 0.25s;
     text-decoration: none;
     color: inherit;
   }
+  .contact-card::after {
+    content: "→";
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    color: var(--primary);
+    font-size: 14px;
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
   .contact-card:hover {
-    border-color: var(--primary);
+    border-color: color-mix(in oklch, var(--primary) 35%, var(--border));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .contact-card:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
   }
   .icon {
     flex: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 999px;
-    background: color-mix(in oklch, var(--primary) 10%, transparent);
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--primary) 16%, transparent),
+      color-mix(in oklch, var(--accent) 14%, transparent)
+    );
     color: var(--primary);
+    transition: transform 0.25s ease;
+  }
+  .contact-card:hover .icon {
+    transform: scale(1.05) rotate(-2deg);
   }
   .meta {
     min-width: 0;

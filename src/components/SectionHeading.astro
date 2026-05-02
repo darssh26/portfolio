@@ -8,28 +8,43 @@ interface Props {
 const { id, eyebrow, title } = Astro.props;
 ---
 
-<div class="section-head">
+<div class="section-head reveal">
   <p class="eyebrow section-rule">
     <span>{eyebrow}</span>
   </p>
-  <h2 id={id} class="section-title">{title}</h2>
+  <h2 id={id} class="section-title">
+    {title}
+    <span class="section-title-accent" aria-hidden="true"></span>
+  </h2>
 </div>
 
 <style>
   .section-head {
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
   }
   .section-title {
+    position: relative;
     margin: 0.75rem 0 0;
     font-size: var(--text-h2);
     line-height: 1.15;
     letter-spacing: -0.02em;
     font-weight: 600;
     color: var(--text);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .section-title-accent {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--gradient-text);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 14%, transparent);
   }
   @media (max-width: 640px) {
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.625rem;
     }
   }
 </style>
