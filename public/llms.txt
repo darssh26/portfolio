@@ -1,0 +1,53 @@
+# Mostafa Ead — Tech Lead
+
+> Tech Lead based in Cairo, Egypt. Nine years in production software, seven
+> leading cross-platform mobile work in Flutter — consumer, fintech, IoT, and
+> edtech apps in global app stores. Recently expanded into AI agent systems
+> and RAG architectures (AWS Certified ML — Specialty). Open to roles.
+
+Source of truth for this content lives in `src/data/site.ts` and `src/data/projects.ts` in the repository at https://github.com/darssh26/portfolio.
+
+## Profile
+
+- [Portfolio site](https://darssh26.github.io/portfolio/): the canonical home page
+- [CV (PDF)](https://darssh26.github.io/portfolio/cv.pdf): full résumé
+- [LinkedIn](https://www.linkedin.com/in/mostafa-ead-b403b51a2/): work history and recommendations
+- [GitHub](https://github.com/darssh26): open-source work
+- Email: dev.mostafa.ead@gmail.com
+
+## Stack
+
+Flutter, Dart, TypeScript, Node.js, Python. AWS Certified Machine Learning — Specialty.
+
+## Projects
+
+### Leadership & production delivery
+
+- **ShopX** — led mobile team to ship global shopping app across stores. [iOS](https://apps.apple.com/eg/app/shopx-global-shopping/id1661978394) · [Android](https://play.google.com/store/apps/details?id=com.shopxco.shopx)
+- **Tank Payments** — financial account product purpose-built for freight carriers. [iOS](https://apps.apple.com/us/app/tank-payments/id6467872756)
+- **BizBuradayız** — roadside-assistance platform. [iOS](https://apps.apple.com/us/app/bizburaday%C4%B1z/id6468649321)
+
+### IoT & smart devices
+
+- **Thkey** — smart access-control app. [iOS](https://apps.apple.com/us/app/thkey/id6740452628) · [Android](https://play.google.com/store/apps/details?id=com.meshkati.thkey)
+- **Rack** — retail-store IoT automation. [iOS](https://apps.apple.com/us/app/rack/id6503873387?platform=iphone) · [Android](https://play.google.com/store/apps/details?id=com.meshkati.rack)
+
+### EdTech & consumer
+
+- **MiSK** — Arabic learning for non-native children. [iOS](https://apps.apple.com/us/app/misk/id1548990632) · [Android](https://play.google.com/store/apps/details?id=com.miskarabic.MiSK1)
+- **Dalilak** — city-information app. [iOS](https://apps.apple.com/eg/app/%D8%AF%D9%84%D9%8A%D9%84%D9%83-dalilak/id6477162339) · [Android](https://play.google.com/store/apps/details?id=app.dalilak.dalilak)
+- **My Thinking Skills** — educational app for thinking-skill development. [Android](https://play.google.com/store/apps/details?id=com.alcegypt.maryam)
+- **Skills** — children's skill-development app. [Android](https://play.google.com/store/apps/details?id=com.alcegypt.skills)
+- **Ad3ia** — Arabic e-book reader. [Android](https://play.google.com/store/apps/details?id=com.alcegypt.ad3ia)
+- **Wisdom** — interactive Arabic-learning activities. [Android](https://play.google.com/store/apps/details?id=com.alcegypt.wisdom_sample)
+
+### Open source & capstone
+
+- **AWS ML Exam Practice** — community study tool for AWS ML Specialty candidates. [GitHub](https://github.com/darssh26/aws-ml-exam)
+- **AI Coder** — Computer Science Diploma capstone project. [GitHub](https://github.com/darssh26/AI-Coder)
+
+## Contact
+
+- Email: dev.mostafa.ead@gmail.com
+- Phone: +20 114 246 6596
+- Location: Cairo, Egypt (UTC+2)

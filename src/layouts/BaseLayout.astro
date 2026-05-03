@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { site } from "../data/site";
+import { projectGroups, type Project } from "../data/projects";
 import { withBase } from "../utils/url";
 
 interface Props {
@@ -14,21 +15,76 @@ const pageDescription = description ?? site.description;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL(withBase("og-image.png"), Astro.site).toString();
 const faviconHref = withBase("favicon.svg");
+const appleTouchIconHref = withBase("apple-touch-icon.png");
 
-const personSchema = {
+const personId = `${canonical}#person`;
+const websiteId = `${canonical}#website`;
+
+function projectType(project: Project): string {
+  const labels = project.links.map((l) => l.label);
+  if (labels.includes("GitHub")) return "SoftwareSourceCode";
+  if (labels.includes("iOS") || labels.includes("Android"))
+    return "MobileApplication";
+  return "CreativeWork";
+}
+
+const projectNodes = projectGroups.flatMap((group) =>
+  group.projects.map((project) => ({
+    "@type": projectType(project),
+    name: project.name,
+    description: project.description,
+    url: project.links[0]?.url,
+    author: { "@id": personId },
+    genre: group.heading,
+  })),
+);
+
+const graph = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.name,
-  jobTitle: site.title,
-  email: `mailto:${site.email}`,
-  telephone: site.phone,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Cairo",
-    addressCountry: "EG",
-  },
-  url: canonical,
-  sameAs: [site.linkedin, site.github],
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: canonical,
+      name: pageTitle,
+      description: pageDescription,
+      inLanguage: "en",
+      author: { "@id": personId },
+    },
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: site.name,
+      jobTitle: site.title,
+      description: site.about,
+      knowsAbout: site.stack,
+      email: `mailto:${site.email}`,
+      telephone: site.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Cairo",
+        addressCountry: "EG",
+      },
+      url: canonical,
+      sameAs: [site.linkedin, site.github],
+      hasCredential: site.certs.map((cert) => ({
+        "@type": "EducationalOccupationalCredential",
+        name: cert,
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: canonical,
+        },
+      ],
+    },
+    ...projectNodes,
+  ],
 };
 ---
 
@@ -38,6 +94,7 @@ const personSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={faviconHref} />
+    <link rel="apple-touch-icon" href={appleTouchIconHref} />
     <meta name="generator" content={Astro.generator} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,7 +125,7 @@ const personSchema = {
 
     <script
       type="application/ld+json"
-      set:html={JSON.stringify(personSchema)}
+      set:html={JSON.stringify(graph)}
     />
 
     <script is:inline>
